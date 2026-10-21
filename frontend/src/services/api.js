@@ -1,4 +1,6 @@
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/+$/, "");
+export const API_URL = (
+  process.env.REACT_APP_API_URL || "http://imovies-project-02hg.onrender.com"
+).replace(/\/+$/, "");
 const AUTH_TOKEN_STORAGE_KEY = "imovies_auth_token";
 
 function buildApiUrl(path) {
@@ -108,5 +110,3 @@ export function cancelBooking(bookingId) {
     method: "POST",
   });
 }
-
-export { API_URL };
