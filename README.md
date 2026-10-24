@@ -8,16 +8,24 @@ MongoDB-backed API.
 - Node.js 18 or newer
 - MongoDB running locally or a MongoDB connection string
 
+## Install dependencies
+
+From the repository root:
+
+```powershell
+npm install
+```
+
+The root npm scripts manage both the frontend and backend workspaces.
+
 ## Run the backend
 
 Set your MongoDB connection string in `backend/.env` (copy
 `backend/.env.example` as a template). Keep the real connection string private
-and do not commit the `.env` file. Then, in a terminal:
+and do not commit the `.env` file. Then, in a terminal at the repository root:
 
 ```powershell
-cd backend
-npm install
-npm run dev
+npm run dev:backend
 ```
 
 The API starts at `http://localhost:5000`. You can change the port with
@@ -46,17 +54,37 @@ fallback artwork if a poster URL is unavailable.
 
 ## Run the frontend
 
-In a second terminal:
+In a second terminal at the repository root:
 
 ```powershell
-cd frontend
-npm install
-npm start
+npm run dev
 ```
 
 The development app opens at `http://localhost:3000`. Set
-`REACT_APP_API_URL` before starting it if the API is not at
-`http://localhost:5000`.
+`REACT_APP_API_URL` before starting it to use a different API. To use the
+local backend, run:
+
+```powershell
+$env:REACT_APP_API_URL = "http://localhost:5000"
+npm start
+```
+
+The frontend defaults to the deployed API at
+`https://imovies-project-02hg.onrender.com`.
+
+## Deploy to Vercel
+
+The root `vercel.json` builds the React app in `frontend` and publishes its
+static build. In Vercel, import this repository with the repository root as the
+Root Directory and deploy. Set `REACT_APP_API_URL` to
+`https://imovies-project-02hg.onrender.com` in the Vercel project environment
+if you want to make the API URL explicit.
+
+If the deployed URL redirects to Vercel login, disable Deployment Protection
+for the deployment or project in Vercel's project settings (or sign in to view
+a protected deployment). That access setting cannot be changed from this
+repository. The backend's `FRONTEND_URL` must match the public Vercel origin
+for browser API requests to pass CORS.
 
 ## Movies and bookings
 
