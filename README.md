@@ -39,6 +39,11 @@ missing sample titles and fills missing release dates, trailer URLs, and ticket
 prices. It also refreshes poster URLs for seeded titles without replacing
 other existing movie edits.
 
+To store or refresh every movie in the sample catalogue in MongoDB, run
+`npm run sync:movies` from `backend`. This upserts all sample titles and
+refreshes their seed fields; it does not delete movies outside the sample
+catalogue. The frontend reads the resulting catalogue from the movies API.
+
 ## Refresh movie posters
 
 The seed catalogue includes poster URLs. To update the poster URLs on sample
@@ -61,8 +66,8 @@ npm run dev
 ```
 
 The development app opens at `http://localhost:3000`. Set
-`REACT_APP_API_URL` before starting it to use a different API. To use the
-local backend, run:
+`REACT_APP_API_URL` before starting it to choose the API. To show data from the
+local MongoDB-backed API, set it to `http://localhost:5000`:
 
 ```powershell
 $env:REACT_APP_API_URL = "http://localhost:5000"
